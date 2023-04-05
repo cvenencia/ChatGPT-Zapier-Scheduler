@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block content %}
+<script
+    type="module"
+    defer
+    src="{{url_for('static', filename= 'js/index.js')}}"
+></script>
+<div class="container">
+    <div class="sub-container">
+        <h1>Generate content for social media and schedule a post</h1>
+        <form action="/confirmation" method="post">
+            <div class="input-group">
+                <label for="social-media">Social media to post:</label>
+                <select name="social-media" id="social-media">
+                    <option value="twitter">Twitter</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="datetime-local"
+                    >Time to post on social media:</label
+                >
+                <input
+                    type="datetime-local"
+                    name="timestamp"
+                    id="timestamp"
+                    required
+                />
+            </div>
+            <div class="keywords">
+                <h2>List of keywords</h2>
+                <div class="keywords-container"></div>
+                <button type="button">+</button>
+            </div>
+            <button type="submit">Submit</button>
+            <div class="spinner hide"></div>
+        </form>
+    </div>
+</div>
+<template id="keyword-template">
+    <div class="input-group">
+        <input type="text" />
+        <button type="button">-</button>
+    </div>
+</template>
+{% endblock %}

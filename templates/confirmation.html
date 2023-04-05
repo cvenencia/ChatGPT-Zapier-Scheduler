@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+<script
+    type="module"
+    defer
+    src="{{url_for('static', filename= 'js/confirmation.js')}}"
+></script>
+<div class="container">
+    <div>
+        <div class="result-group">
+            <h2>Tweet to publish</h2>
+            <pre>{{tweet}}</pre>
+        </div>
+        <div class="result-group">
+            <h2>Time to publish</h2>
+            <p id="time"></p>
+            <p id="relative-time"></p>
+        </div>
+        <div class="result-group confirmation">
+            <h2>Is this correct?</h2>
+            <div class="buttons">
+                <button class="publish" id="publish-btn">Publish!</button>
+                <button class="cancel" id="cancel-btn">No, go back!</button>
+            </div>
+            <div class="spinner hide"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function fixUnicodeCharacters(text) {
+        return text.replace(/&#(\d+);/g, (match, dec) =>
+            String.fromCharCode(dec)
+        );
+    }
+    localStorage.setItem('tweet', fixUnicodeCharacters('{{ tweet }}'));
+    localStorage.setItem(
+        'unix_timestamp',
+        fixUnicodeCharacters('{{ unix_timestamp }}')
+    );
+</script>
+{% endblock %}
